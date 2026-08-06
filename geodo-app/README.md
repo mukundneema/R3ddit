@@ -37,8 +37,9 @@ anything upstream of `components/app/post-strategy-card.tsx`.
 - Tailwind CSS + hand-rolled shadcn/ui-style components (no external UI
   package, so there's nothing extra to install)
 - Framer Motion for animation
-- OpenAI API (`gpt-4o-mini` by default) for the interview summary, subreddit
-  recommendations, post generation, and rule checking
+- Google Gemini API (`gemini-2.5-flash`, via its OpenAI-compatible endpoint)
+  for the interview summary, subreddit recommendations, post generation, and
+  rule checking — genuinely free, no credit card required
 - Reddit's public, unauthenticated JSON endpoints (`/about.json`,
   `/about/rules.json`) for fetching real subreddit rules — no API key needed
   for this, it's the same data anyone sees browsing reddit.com
@@ -60,14 +61,14 @@ cp .env.example .env.local
 Then fill in `.env.local` — there's only one required value:
 
 ```
-OPENAI_API_KEY=sk-...
+GEMINI_API_KEY=...
 ```
 
-Get a key from https://platform.openai.com/api-keys. This app uses
-`gpt-4o-mini`, which is inexpensive — testing the full flow many times over
-should cost well under $1. OpenAI requires a payment method on file; you can
-set a spending limit under Settings → Billing → Limits to cap it (e.g. $5)
-while testing.
+Get a free key at https://aistudio.google.com/apikey — sign in with a
+Google account, no credit card or billing setup required. The app uses
+`gemini-2.5-flash` through Gemini's OpenAI-compatible endpoint, which stays
+within Gemini's free tier for normal testing use (rate-limited, not meant
+for high-traffic production, but plenty for building and demoing this app).
 
 ## 3. Run it
 
@@ -88,7 +89,7 @@ and hit Post yourself.
 3. If your repo has `package.json` inside a subfolder rather than at the
    root, set **Root Directory** to that subfolder name.
 4. Add one environment variable in Vercel's project settings:
-   `OPENAI_API_KEY`.
+   `GEMINI_API_KEY`.
 5. Deploy. No build steps or extra setup required.
 
 ## How the pieces fit together
