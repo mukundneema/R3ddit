@@ -1,26 +1,25 @@
 import OpenAI from "openai";
 
-// Uses Google's Gemini API through its OpenAI-compatible endpoint. Gemini's
-// free tier requires no credit card and no billing setup — get a key at
-// https://aistudio.google.com/apikey. We keep using the `openai` SDK because
-// Gemini implements the same request/response shape at this base URL, so
-// none of the calling code needs to change.
-const GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/";
-const MODEL = "gemini-2.5-flash";
+// Uses Groq's API, which is free (no credit card) and OpenAI-compatible, so
+// none of the calling code needs to change. Get a key at
+// https://console.groq.com/keys — just an email/Google sign-in, no billing
+// setup and no cloud-project creation step.
+const GROQ_BASE_URL = "https://api.groq.com/openai/v1";
+const MODEL = "llama-3.3-70b-versatile";
 
 let client: OpenAI | null = null;
 
 function getClient(): OpenAI {
   if (client) return client;
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     throw new Error(
-      "GEMINI_API_KEY is not set. Add it to your .env.local file (see .env.example)."
+      "GROQ_API_KEY is not set. Add it to your .env.local file (see .env.example)."
     );
   }
 
-  client = new OpenAI({ apiKey, baseURL: GEMINI_BASE_URL });
+  client = new OpenAI({ apiKey, baseURL: GROQ_BASE_URL });
   return client;
 }
 

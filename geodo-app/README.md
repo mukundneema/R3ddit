@@ -37,7 +37,7 @@ anything upstream of `components/app/post-strategy-card.tsx`.
 - Tailwind CSS + hand-rolled shadcn/ui-style components (no external UI
   package, so there's nothing extra to install)
 - Framer Motion for animation
-- Google Gemini API (`gemini-2.5-flash`, via its OpenAI-compatible endpoint)
+- Groq API (`llama-3.3-70b-versatile`, via its OpenAI-compatible endpoint)
   for the interview summary, subreddit recommendations, post generation, and
   rule checking — genuinely free, no credit card required
 - Reddit's public, unauthenticated JSON endpoints (`/about.json`,
@@ -61,14 +61,15 @@ cp .env.example .env.local
 Then fill in `.env.local` — there's only one required value:
 
 ```
-GEMINI_API_KEY=...
+GROQ_API_KEY=gsk_...
 ```
 
-Get a free key at https://aistudio.google.com/apikey — sign in with a
-Google account, no credit card or billing setup required. The app uses
-`gemini-2.5-flash` through Gemini's OpenAI-compatible endpoint, which stays
-within Gemini's free tier for normal testing use (rate-limited, not meant
-for high-traffic production, but plenty for building and demoing this app).
+Get a free key at https://console.groq.com/keys — sign up with email or
+Google, no credit card, no billing setup, and no cloud project creation
+step. The app uses `llama-3.3-70b-versatile` through Groq's OpenAI-compatible
+endpoint, which stays within Groq's free tier for normal testing use
+(rate-limited, not meant for high-traffic production, but plenty for
+building and demoing this app).
 
 ## 3. Run it
 
@@ -89,7 +90,7 @@ and hit Post yourself.
 3. If your repo has `package.json` inside a subfolder rather than at the
    root, set **Root Directory** to that subfolder name.
 4. Add one environment variable in Vercel's project settings:
-   `GEMINI_API_KEY`.
+   `GROQ_API_KEY`.
 5. Deploy. No build steps or extra setup required.
 
 ## How the pieces fit together
